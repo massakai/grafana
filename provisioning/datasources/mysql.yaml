@@ -1,0 +1,38 @@
+# config file version
+apiVersion: 1
+
+# list of datasources that should be deleted from the database
+deleteDatasources:
+  - name: Graphite
+    orgId: 1
+
+# list of datasources to insert/update depending
+# what's available in the database
+datasources:
+  # <string, required> name of the datasource. Required
+  - name: MySQL test
+    # <string, required> datasource type. Required
+    type: mysql
+    # <string> url
+    url: localhost:3306
+      # <string> database user, if used
+    user: grafana
+    # <string> Deprecated, use secureJsonData.password
+    password: $MYSQL_PASSWORD
+    # <string> database name, if used
+    database: test
+    # <map> fields that will be converted to json and stored in jsonData
+    jsonData:
+      tlsAuth: true
+      tlsAuthWithCACert: true
+      # Lowest interval/step value that should be used for this data source.
+      timeInterval: 10
+      # Maximum number of open connections to the database
+      maxOpenConns: 100
+      # Maximum number of connections in the idle connection pool
+      maxIdleConns: 3
+      # Maximum amount of time in seconds a connection may be reused
+      connMaxLifetime: 60
+    version: 1
+    # <bool> allow users to edit datasources from the UI.
+    editable: false
